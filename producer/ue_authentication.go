@@ -179,12 +179,11 @@ func UeAuthPostRequestProcedure(updateAuthenticationInfo models.AuthenticationIn
 		ausfUeContext.Kseaf = hex.EncodeToString(Kseaf)
 		ausfUeContext.Rand = authInfoResult.AuthenticationVector.Rand
 
-		var av5gAka models.Av5gAka
-		av5gAka.Rand = authInfoResult.AuthenticationVector.Rand
-		av5gAka.Autn = authInfoResult.AuthenticationVector.Autn
-		av5gAka.HxresStar = hxresStar
-
-		responseBody.Var5gAuthData = av5gAka
+		responseBody.Av5gAka = &models.Av5gAka{
+			Rand:      authInfoResult.AuthenticationVector.Rand,
+			Autn:      authInfoResult.AuthenticationVector.Autn,
+			HxresStar: hxresStar,
+		}
 	} else if authInfoResult.AuthType == models.AuthType_EAP_AKA_PRIME {
 		logger.UeAuthPostLog.Infoln("Use EAP-AKA' auth method")
 		putLink += "/eap-session"
@@ -268,7 +267,7 @@ func UeAuthPostRequestProcedure(updateAuthenticationInfo models.AuthenticationIn
 
 		eapPkt.Data = []byte(dataArrayAfterMAC)
 		encodedPktAfterMAC := eapPkt.Encode()
-		responseBody.Var5gAuthData = base64.StdEncoding.EncodeToString(encodedPktAfterMAC)
+		responseBody.AvEapAkaPrime = base64.StdEncoding.EncodeToString(encodedPktAfterMAC)
 	}
 
 	linksValue := models.LinksValueSchema{Href: putLink}

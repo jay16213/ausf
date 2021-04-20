@@ -23,3 +23,7 @@ require (
 	github.com/urfave/cli v1.22.5
 	gopkg.in/yaml.v2 v2.4.0
 )
+
+replace (
+	github.com/free5gc/openapi v1.0.0 => /home/jay/thesis/openapi
+)
