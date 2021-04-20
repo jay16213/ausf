@@ -179,7 +179,7 @@ func UeAuthPostRequestProcedure(updateAuthenticationInfo models.AuthenticationIn
 		ausfUeContext.Kseaf = hex.EncodeToString(Kseaf)
 		ausfUeContext.Rand = authInfoResult.AuthenticationVector.Rand
 
-		responseBody.Av5gAka = &models.Av5gAka{
+		responseBody.Av5gAka = models.Av5gAka{
 			Rand:      authInfoResult.AuthenticationVector.Rand,
 			Autn:      authInfoResult.AuthenticationVector.Autn,
 			HxresStar: hxresStar,

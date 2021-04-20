@@ -20,7 +20,7 @@ all: $(AUSF)
 $(AUSF): $(AUSF).go
 	CGO_ENABLED=0 go build -ldflags "$(LDFLAGS)" -o $@ $^
 
-$(DOCKER): Dockerfile
+$(DOCKER): $(AUSF) Dockerfile
 	docker build . -t $(DOCKER_IMAGE)
 
 push:
