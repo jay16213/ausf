@@ -1,6 +1,6 @@
 AUSF = ausf
 DOCKER = docker
-DOCKER_IMAGE = 10.10.4.190:5000/jay16213/ausf
+DOCKER_IMAGE = 10.10.0.31:5000/jay16213/ausf
 
 VERSION = $(shell git describe --tags)
 BUILD_TIME = $(shell date -u +"%Y-%m-%dT%H:%M:%SZ")

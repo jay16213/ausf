@@ -20,7 +20,6 @@ import (
 	"github.com/free5gc/ausf/util"
 	"github.com/free5gc/http2_util"
 	"github.com/free5gc/logger_util"
-	openApiLogger "github.com/free5gc/openapi/logger"
 	"github.com/free5gc/path_util"
 	pathUtilLogger "github.com/free5gc/path_util/logger"
 )
@@ -119,22 +118,6 @@ func (ausf *AUSF) setLogLevel() {
 			pathUtilLogger.SetLogLevel(logrus.InfoLevel)
 		}
 		pathUtilLogger.SetReportCaller(factory.AusfConfig.Logger.PathUtil.ReportCaller)
-	}
-
-	if factory.AusfConfig.Logger.OpenApi != nil {
-		if factory.AusfConfig.Logger.OpenApi.DebugLevel != "" {
-			if level, err := logrus.ParseLevel(factory.AusfConfig.Logger.OpenApi.DebugLevel); err != nil {
-				openApiLogger.OpenApiLog.Warnf("OpenAPI Log level [%s] is invalid, set to [info] level",
-					factory.AusfConfig.Logger.OpenApi.DebugLevel)
-				openApiLogger.SetLogLevel(logrus.InfoLevel)
-			} else {
-				openApiLogger.SetLogLevel(level)
-			}
-		} else {
-			openApiLogger.OpenApiLog.Warnln("OpenAPI Log level not set. Default set to [info] level")
-			openApiLogger.SetLogLevel(logrus.InfoLevel)
-		}
-		openApiLogger.SetReportCaller(factory.AusfConfig.Logger.OpenApi.ReportCaller)
 	}
 }
 
